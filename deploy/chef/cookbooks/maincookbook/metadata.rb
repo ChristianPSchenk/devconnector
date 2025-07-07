@@ -1,0 +1,7 @@
+name 'maincookbook'
+maintainer 'Christian'
+maintainer_email 'christian.p.schenk@gmail.com'
+license 'Do what you want'
+description 'maincookbook'
+version '0.1.0'
+chef_version '>= 14.0'
