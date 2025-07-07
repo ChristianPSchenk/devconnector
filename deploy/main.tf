@@ -84,8 +84,8 @@ resource "aws_ssm_association" "chef_managed" {
 
   parameters = {
     SourceType : "GitHub",
-    SourceInfo : "{ \"owner\": \"ChristianPSchenk\",\"repository\": \"devconnector\",\"path\": \"deploy/chef/cookbooks/maincookbook\",\"getOptions\": \"branch:refs/heads/main\"}",
-    RunList : "recipe[maincookbook::default]"
+    SourceInfo : "{ \"owner\": \"ChristianPSchenk\",\"repository\": \"devconnector\",\"path\": \"deploy/chef/cookbooks\",\"getOptions\": \"branch:refs/heads/main\"}",
+    RunList : "recipe[maincookbook::baseinstalls]"
 
 
   }
