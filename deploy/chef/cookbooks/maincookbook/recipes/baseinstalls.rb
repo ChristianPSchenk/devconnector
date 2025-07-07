@@ -15,3 +15,24 @@ end
 package 'git' do
   action :install
 end
+
+directory '/opt/devconnector' do
+  owner 'root'
+  group 'root'
+  mode '0777'
+  action :create
+  recursive true
+end
+
+
+git "/opt/devconnector/repo" do
+  repository "https://github.com/ChristianPSchenk/devconnector.git"
+  revision "/refs/heads/main""
+  action :sync
+end
+
+execute 'run_setup_script' do
+  command 'bash /opt/devconnector/repo/build_and_run.sh'
+  cwd '/opt/devconnector/repo'
+  action :run
+end
