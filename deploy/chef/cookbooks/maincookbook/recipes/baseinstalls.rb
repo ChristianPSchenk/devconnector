@@ -27,7 +27,7 @@ end
 
 git "/opt/devconnector/repo" do
   repository "https://github.com/ChristianPSchenk/devconnector.git"
-  revision "/refs/heads/main""
+  revision "main"
   action :sync
 end
 
