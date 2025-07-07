@@ -1,0 +1,8 @@
+{
+    "run_list": [
+        "recipe[maincookbook]"
+    ],
+    "devconnector": {
+        "some_attribute": "some_value"
+    }
+}

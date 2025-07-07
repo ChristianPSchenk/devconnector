@@ -3,4 +3,12 @@ client/node_modules/
 production.json
 default.json
 client/build/* */
+.env
+.terraform
+terraform.tfstate*
+.terraform.lock.hcl
+nodes
+chef_guid
+hallochef.txt
+local-mode-cache
 
