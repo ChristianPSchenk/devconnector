@@ -31,8 +31,54 @@ git "/opt/devconnector/repo" do
   action :sync
 end
 
-execute 'run_setup_script' do
-  command 'bash /opt/devconnector/repo/build_and_run.sh'
-  cwd '/opt/devconnector/repo'
-  action :run
+
+file '/opt/devconnector/repo/config/production.json' do
+  content <<-EOF
+{
+       "mongoURI": "mongodb://...",
+    "jwtSecret": "...",
+    "jwtExpiry": "3600",
+    "githubClientId": "...",
+    "githubSecret": "..."
+}
+  EOF
+  owner 'root'
+  group 'root'
+  mode '0644'
+  action :create
 end
+
+file '/etc/systemd/system/devconnector.service' do
+  content <<-EOF
+[Unit]
+Description=DevConnector Node.js App
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/devconnector/repo
+Environment=NODE_ENV=production
+Environment=PORT=80
+ExecStart=/bin/bash /opt/devconnector/repo/build_and_run.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+  EOF
+  owner 'root'
+  group 'root'
+  mode '0644'
+  action :create
+end
+
+execute 'reload_systemd' do
+  command 'systemctl daemon-reload'
+end
+
+service 'devconnector' do
+  action [:enable, :start]
+end
+
+
+

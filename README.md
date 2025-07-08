@@ -1,1 +1,4 @@
-Result of the packt training on react backend and frontend development.
+- Result of the packt training on react backend and frontend development: a small application where developers can create profiles and post messages and comment on them.
+- basically the training, but updated deprecated stuff (e.g. Routes)
+- added Terraform deploy to provision a machine in AWS to run the application
+- added Chef scripts to run the application.
