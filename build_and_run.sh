@@ -13,7 +13,7 @@ echo "Searching for mongodb in the network"
 export SERVICEIP=`for i in {0..255} ; do result=$(curl -s --connect-timeout 0.05 10.0.1.$i:27017) ; if [[ "$result" == *"MongoDB"* ]] ; then echo $i ; break ; fi ; done`
 echo "Found at 10.0.1.$SERVICEIP"
 
-. /opt/devconnector/jwtSecret
+. /opt/devconnector_jwtSecret
 echo "Found jwt secret: $JWT_SECRET"
 export NODE_CONFIG="{\"jwtSecret\":\"$JWT_SECRET\",\"mongoURI\": \"mongodb://10.0.1.$SERVICEIP:27017/?retryWrites=true&w=majority&appName=DevConnector\"}"
 
