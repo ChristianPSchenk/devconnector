@@ -38,8 +38,8 @@ end
 file '/opt/devconnector/repo/config/production.json' do
   content <<-EOF
 {
-       "mongoURI": "mongodb://...",
-    "jwtSecret": "...",
+    "mongoURI": "will be set via environment in build_and_run.sh",
+    "jwtSecret": "will be set via environment in build_and_run.sh",
     "jwtExpiry": "3600",
     "githubClientId": "...",
     "githubSecret": "..."
