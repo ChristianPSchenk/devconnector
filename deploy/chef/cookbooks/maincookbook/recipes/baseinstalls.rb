@@ -4,19 +4,19 @@
 # Install Node.js
 package 'nodejs' do
   action :install
-  options 'DPkg::Lock::Timeout=300'
+  options '-o DPkg::Lock::Timeout=300'
 end
 
 # Install npm (if not included with nodejs)
 package 'npm' do
   action :install
-  options 'DPkg::Lock::Timeout=300'  
+  options '-o DPkg::Lock::Timeout=300'  
 end
 
 # Install Git
 package 'git' do
   action :install
-  options 'DPkg::Lock::Timeout=300'  
+  options '-o DPkg::Lock::Timeout=300'  
 end
 
 directory '/opt/devconnector' do
