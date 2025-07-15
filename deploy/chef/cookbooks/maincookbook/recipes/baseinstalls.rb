@@ -1,6 +1,11 @@
 # Cookbook:: devconnector
 # Recipe:: install_nodejs_git
 
+
+apt_update 'update' do
+  action :update
+end
+
 # Install Node.js
 package 'nodejs' do
   action :install
