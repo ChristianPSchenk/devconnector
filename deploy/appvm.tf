@@ -63,8 +63,10 @@ resource "aws_instance" "vm" {
                   uri: http://ie.archive.ubuntu.com/ubuntu/
               bootcmd:
                - [ sh, -c, "echo JWT_SECRET=${random_password.jwtSecret.result} > /opt/devconnectorSecrets" ]  
-               - [ sh, -c, "echo NOIP_USERNAME=${local.secrets.noipusername} > /opt/devconnectorSecrets" ]  
-               - [ sh, -c, "echo NOIP_PASSWORD=${local.secrets.noippassword} > /opt/devconnectorSecrets" ]  
+               - [ sh, -c, "echo NOIP_USERNAME=${local.secrets.noipusername} >> /opt/devconnectorSecrets" ]  
+               - [ sh, -c, "echo NOIP_PASSWORD=${local.secrets.noippassword} >> /opt/devconnectorSecrets" ]  
+               - [ sh, -c, "echo GITHUB_CLIENTID=${local.secrets.githubclientid} >> /opt/devconnectorSecrets" ]  
+               - [ sh, -c, "echo GITHUB_SECRET=${local.secrets.githubsecret} >> /opt/devconnectorSecrets" ]                                
               write_files:
               - content: |
                   #!/bin/bash                  
