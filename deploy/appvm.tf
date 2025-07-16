@@ -100,7 +100,7 @@ resource "aws_ssm_association" "chef_managed" {
     values = ["devconnector"]
   }
 
-  schedule_expression = "cron(0 0 * * ? *)"
+  schedule_expression = "cron(0,30 * * * ? *)"
 
   parameters = {
     SourceType : "GitHub",
