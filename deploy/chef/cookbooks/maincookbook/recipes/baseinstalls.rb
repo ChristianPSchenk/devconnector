@@ -37,6 +37,7 @@ git "/opt/devconnector/repo" do
   repository "https://github.com/ChristianPSchenk/devconnector.git"
   revision "main"
   action :sync
+  notifies :restart, 'service[devconnector]', :immediately
 end
 
 
@@ -46,8 +47,8 @@ file '/opt/devconnector/repo/config/production.json' do
     "mongoURI": "will be set via environment in build_and_run.sh",
     "jwtSecret": "will be set via environment in build_and_run.sh",
     "jwtExpiry": "3600",
-    "githubClientId": "...",
-    "githubSecret": "..."
+    "githubClientId": "will be set via environment in build_and_run.sh",
+    "githubSecret": "will be set via environment in build_and_run.sh"
 }
   EOF
   owner 'root'

@@ -20,7 +20,7 @@ myip=`curl ifconfig.me`
 
 curl -f -u ${NOIP_USERNAME}:${NOIP_PASSWORD} "http://dynupdate.no-ip.com/nic/update?hostname=christianschenk.freedynamicdns.net&myip=$myip"
 
-export NODE_CONFIG="{\"jwtSecret\":\"$JWT_SECRET\",\"mongoURI\": \"mongodb://10.0.1.$SERVICEIP:27017/?retryWrites=true&w=majority&appName=DevConnector\"}"
+export NODE_CONFIG="{\"jwtSecret\":\"$JWT_SECRET\",\"mongoURI\": \"mongodb://10.0.1.$SERVICEIP:27017/?retryWrites=true&w=majority&appName=DevConnector\",\"githubClientId\":\"${GITHUB_CLIENTID}\",\"githubSecret\":\"${GITHUB_SECRET}\"}"
 
 /usr/bin/node /opt/devconnector/repo/server.js
 
