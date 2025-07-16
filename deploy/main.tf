@@ -11,6 +11,10 @@ provider "aws" {
   }
 }
 
+locals {
+  secrets = yamldecode(file("${path.module}/secrets.yaml"))
+}
+
 
 resource "aws_vpc" "main" {
   cidr_block           = "10.0.0.0/16"
@@ -60,15 +64,18 @@ resource "aws_route_table_association" "main" {
   route_table_id = aws_route_table.main.id
 }
 
-resource "aws_s3_bucket" "main" {
-  bucket        = "cks2si-devconnector-bucket"
-  force_destroy = true
 
-}
+# To get flow logs:
 
-resource "aws_flow_log" "mainlogs" {
-  log_destination      = aws_s3_bucket.main.arn
-  log_destination_type = "s3"
-  traffic_type         = "ALL"
-  vpc_id               = aws_vpc.main.id
-}
+#resource "aws_s3_bucket" "main" {
+#  bucket        = "cks2si-devconnector-bucket"
+#  force_destroy = true
+#
+#}
+#
+#resource "aws_flow_log" "mainlogs" {
+#  log_destination      = aws_s3_bucket.main.arn
+#  log_destination_type = "s3"
+#  traffic_type         = "ALL"
+#  vpc_id               = aws_vpc.main.id
+#}

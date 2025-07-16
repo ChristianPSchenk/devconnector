@@ -9,6 +9,7 @@ terraform.tfstate*
 .terraform.lock.hcl
 nodes
 jwtSecret
+secrets.yaml
 chef_guid
 hallochef.txt
 local-mode-cache

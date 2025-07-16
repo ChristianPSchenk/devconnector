@@ -62,7 +62,9 @@ resource "aws_instance" "vm" {
                 - arches: [default]
                   uri: http://ie.archive.ubuntu.com/ubuntu/
               bootcmd:
-               - [ sh, -c, "echo JWT_SECRET=${random_password.jwtSecret.result} > /opt/devconnector/jwtSecret" ]  
+               - [ sh, -c, "echo JWT_SECRET=${random_password.jwtSecret.result} > /opt/devconnectorSecrets" ]  
+               - [ sh, -c, "echo NOIP_USERNAME=${local.secrets.noipusername} > /opt/devconnectorSecrets" ]  
+               - [ sh, -c, "echo NOIP_PASSWORD=${local.secrets.noippassword} > /opt/devconnectorSecrets" ]  
               write_files:
               - content: |
                   #!/bin/bash                  
@@ -81,6 +83,10 @@ resource "aws_instance" "vm" {
     Name        = "cks2si"
     Application = "devconnector"
   }
+  credit_specification {
+    cpu_credits = "standard"
+  }
+
 }
 
 

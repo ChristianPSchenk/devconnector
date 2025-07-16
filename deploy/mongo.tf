@@ -13,7 +13,7 @@ resource "aws_ecs_capacity_provider" "capacity_provider" {
 
     managed_scaling {
       status                    = "ENABLED"
-      target_capacity           = 100
+      target_capacity           = 50
       minimum_scaling_step_size = 1
       maximum_scaling_step_size = 1
       instance_warmup_period    = 180
@@ -43,6 +43,10 @@ resource "aws_launch_template" "ecs" {
   vpc_security_group_ids = [aws_security_group.ecs.id]
 
   user_data = base64encode(data.template_file.ecs_user_data.rendered)
+
+  credit_specification {
+    cpu_credits = "standard"
+  }
 }
 
 
@@ -64,11 +68,19 @@ resource "aws_autoscaling_group" "ecs" {
     key                 = "Name"
     value               = "ecs-instance"
     propagate_at_launch = true
+
+  }
+  tag {
+    key                 = "AmazonECSManaged"
+    value               = true
+    propagate_at_launch = true
   }
 
   lifecycle {
     ignore_changes = [desired_capacity, tag]
   }
+
+
 }
 
 data "template_file" "ecs_user_data" {
